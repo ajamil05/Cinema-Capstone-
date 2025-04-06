@@ -54,16 +54,6 @@ namespace Capstone.Menus
         /// </summary>
         public override void Select()
         {
-            _menuItems.Clear();
-            _menuItems.Add(new TransactionMenuItem(ref _totalSum, 1, 2));
-            _menuItems.Add(new ExitMenuItem(_ParentMenu));
-            for (int i = 0; i < _menuItems.Count; i++)
-            {
-                Console.WriteLine($"{i + 1}. {_menuItems[i].MenuText()}");
-            }
-            int valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose a Item To Add Towards The Transaction");
-            if (valueToAdd == 1)
-            {
                 _menuItems.Clear();
                 _menuItems.Add(new AddConcessionsMenuItem(ref _totalSum, 1, 2));
                 _menuItems.Add(new ExitMenuItem(_ParentMenu));
@@ -71,7 +61,7 @@ namespace Capstone.Menus
                 {
                     Console.WriteLine($"{i + 1}. {_menuItems[i].MenuText()}");
                 }
-                valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose a Item To Add Towards The Transaction");
+                int valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose a Item To Add Towards The Transaction");
                 if (valueToAdd == 1)
                 {
                     Transaction transaction = new Transaction();
@@ -82,8 +72,6 @@ namespace Capstone.Menus
                     }
                 }
                 _totalSum.AddToSum(valueToAdd);
-            }
-            _totalSum.AddToSum(valueToAdd);
         }
     }
 }

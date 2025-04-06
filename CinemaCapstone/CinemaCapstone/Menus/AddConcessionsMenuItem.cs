@@ -26,7 +26,7 @@ namespace Capstone.Menus
         }
         public override string MenuText()
         {
-            return "Add Concession";
+            return "Add Concession To Transaction";
         }
         public override void Select()
         {

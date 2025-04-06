@@ -45,8 +45,10 @@ namespace Capstone.Menus
             int valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose a Concession");
             if (valueToAdd == 1)
             {
-                TransactionMenuItem transaction = new TransactionMenuItem(ref _totalSum, 1, 2);
-                transaction.Select();
+                TransactionMenuItem transactionitem = new TransactionMenuItem(ref _totalSum, 1, 2);
+                transactionitem.Select();
+                Transaction transaction = new Transaction();
+                transaction.AddConcessions();
             }
             _totalSum.AddToSum(valueToAdd);
         }

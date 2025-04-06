@@ -38,11 +38,14 @@ namespace Capstone.Menus
         public override void Select()
         {
             _menuItems.Clear();
+            _menuItems.Add(new TransactionMenuItem(ref _totalSum, 1, 2));
+            _menuItems.Add(new ExitMenuItem(_ParentMenu));
             for (int j = 0; j < _menuItems.Count; j++)
             {
                     Console.WriteLine($"{j + 1}. {_menuItems[j].MenuText()}");
             }
-            _totalSum.AddToSum(2);
+            int valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose To Start An Transaction");
+            _totalSum.AddToSum(valueToAdd);
         }
     }
 }
