@@ -1,0 +1,2 @@
+﻿[Ticket:Standard%Price:800]
+[Ticket:Premium%Price:1200]

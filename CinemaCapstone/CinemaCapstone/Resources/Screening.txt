@@ -1,0 +1,3 @@
+﻿[Screen:C%NumPremiumSeat:0%NumStandardSeat:60]
+[Screen:A%NumPremiumSeat:20%NumStandardSeat:40]
+[Screen:B%NumPremiumSeat:15%NumStandardSeat:0]
