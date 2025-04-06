@@ -45,7 +45,7 @@ namespace Capstone.Menus
                         _menuItems.Add(new TicketMenuItem(ref _totalSum, 1, 6));
                         _menuItems.Add(new ConncessionsMenuItem(ref _totalSum, 1, 3));
                         _menuItems.Add(new MemberShipMenuItem(ref _totalSum, 1, 3));
-						//_menuItems.Add(new AddConcessionsMenuItem(ref _totalSum, 1, 2));
+						//_menuItems.Add(new TransactionMenuItem(ref _totalSum, 1, 3));
                     }
 			_menuItems.Add(new ExitMenuItem(this));
         }

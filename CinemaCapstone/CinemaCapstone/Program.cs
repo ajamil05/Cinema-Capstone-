@@ -24,6 +24,6 @@ string path2 = $@"{Environment.CurrentDirectory}\Resources\StaffManager.txt";
 string path3 = $@"{Environment.CurrentDirectory}\Resources\Ticket.txt";
 ExampleSumObject exampleSumObject = new ExampleSumObject(0); 
 // Create and display the CinemaManager menu
-CinemaManager myMenu = new CinemaManager(ref exampleSumObject);
+CinemaManager myMenu = new CinemaManager(exampleSumObject);
 myMenu.Select();
 // to do - Dynamically Create TicketTypes Menu Items

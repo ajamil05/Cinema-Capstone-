@@ -13,12 +13,12 @@ namespace Capstone.Menus
         private ExampleSumObject _totalSum;
 
         private List<ConcessionParse.ConcessionData> Concessions;
-
         public int Min { get; set; }
 
         public int Max { get; set; }
         public ConncessionsMenuItem(ref ExampleSumObject totalsum, int min, int max)
         {
+            TotalTransaction = new List<int>();
             _totalSum = totalsum;
             Min = min;
             Max = max;
@@ -43,6 +43,11 @@ namespace Capstone.Menus
             }
             Console.WriteLine(stringBuilder.ToString());
             int valueToAdd = ConsoleHelpers.GetIntegerInRange(Min, Max, "Choose a Concession");
+            if (valueToAdd == 1)
+            {
+                TransactionMenuItem transaction = new TransactionMenuItem(ref _totalSum, 1, 2);
+                transaction.Select();
+            }
             _totalSum.AddToSum(valueToAdd);
         }
     }

@@ -5,6 +5,8 @@
 	/// </summary>
 	internal abstract class MenuItem
 	{
+        public List<int> TotalTransaction;
+
         public List<MenuItem> _menuItems = new List<MenuItem>();
 
 		public ConsoleMenu _ParentMenu;
@@ -13,9 +15,7 @@
 
 		public string[] GeneralManager;
 
-        public string[] Ticket; 
-
-        
+		public string[] Ticket;
       
         /// <summary>
         /// Executes the action associated with selecting the menu item.
