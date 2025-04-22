@@ -17,7 +17,7 @@
     <None Update="Resources\Screening.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Resources\StaffManager.txt">
+    <None Update="Resources\Staff.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -7,15 +7,14 @@ namespace Capstone.Menus
 	/// </summary>
 	internal static class ConsoleHelpers
 	{
-		/// <summary>
-		/// Prompts the user to enter an integer within a specified range.
-		/// </summary>
-		/// <param name="pMin">The minimum acceptable value (inclusive).</param>
-		/// <param name="pMax">The maximum acceptable value (inclusive).</param>
-		/// <param name="pMessage">The message to display to the user.</param>
-		/// <returns>An integer entered by the user within the specified range.</returns>
-		/// <exception cref="Exception">Thrown when the minimum value is greater than the maximum value.</exception>
-		public static int GetIntegerInRange(int pMin, int pMax, string pMessage)
+        /// <summary>
+        /// Prompts the user to enter an integer within a specified range (inclusive).
+        /// </summary>
+        /// <param name="pMin"></param>
+        /// <param name="pMax"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static int GetIntegerInRange(int pMin, int pMax)
 		{
 			if (pMin > pMax)
 			{
@@ -26,7 +25,6 @@ namespace Capstone.Menus
 
 			do
 			{
-				Console.WriteLine(pMessage);
 				Console.WriteLine($"Please enter a number between {pMin} and {pMax} inclusive.");
 				string userInput = Console.ReadLine();
 
@@ -44,72 +42,39 @@ namespace Capstone.Menus
 				{
 					return result;
 				}
-				Console.WriteLine($"{result} is not between {pMin} and {pMax} inclusive.");
 			} while (true);
 		}
-		public static string GetStringInRange(string pMessage, string Message, string Messages)
+
+        /// <summary>
+        /// Prompts the user to enter an  valid age (inclusive) based on the rating of the movie.
+        /// </summary>
+        /// <param name="Size"></param>
+        /// <param name="rating"></param>
+        /// <returns></returns>
+        public static int AgeInput(int Size, string rating)
 		{
-            Console.WriteLine(pMessage);
-
-            string firstname = Console.ReadLine();
-
-            Console.WriteLine(Message);
-
-            string lastname = Console.ReadLine();
-
-            Console.WriteLine(Messages);
-
-            string email = Console.ReadLine();
-
-            using (StreamWriter sw = new StreamWriter("LoyalityMember.txt"))
+            int value = 0;
+            if (rating == "18")
 			{
-                bool Num = int.TryParse(firstname, out int i1);
-
-                bool Num2 = int.TryParse(lastname, out int i2);
-
-                bool First = char.IsUpper(firstname[0]);
-
-                bool Last = char.IsUpper(lastname[0]);
-
-                if (Num! && Num2! || !First && !Last)
-                {
-                    Console.WriteLine("invalid Names");
-                    return GetStringInRange(pMessage, Message, Messages);
-                }
-
-                for (int i = 0; i < email.Length; i++)
-                {
-                    if (email[0] == '@' || email[0] == '.' || email.Length == '@' || email.Length == '.')
-                    {
-                        Console.WriteLine("invalid Email Address");
-                        return GetStringInRange(pMessage, Message, Messages);
-                    }
-                }
-                sw.WriteLine($"{pMessage}:{firstname} {Message}:{lastname} {Messages}:{email}");
-            }
-			return $"{pMessage}:{firstname} {Message}:{lastname} {Messages}:{email}";
-		}
-
-		/// <summary>
-		/// Displays a list of items as a menu and prompts the user to select one.
-		/// </summary>
-		/// <param name="items">The list of items to display in the menu.</param>
-		/// <param name="prompt">The prompt message to display to the user.</param>
-		/// <returns>The index of the selected item (zero-based).</returns>
-		public static int GetSelectionFromMenu(IEnumerable<string> items, string prompt)
-		{
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(prompt);
-
-			int itemNumber = 0;
-
-			foreach (string item in items)
-			{
-				itemNumber++;
-				sb.AppendLine($"{itemNumber}. {item}");
+				value = int.Parse(rating);
 			}
-
-			return GetIntegerInRange(1, itemNumber, sb.ToString()) - 1;
-		}
-	}
+			if (rating == "15")
+			{
+				value = int.Parse(rating);
+			}
+			if (rating == "12")
+			{
+				value = int.Parse(rating);
+			}
+			if (rating == "U")
+			{
+				value = 0;
+			}
+			for (int i = 0; i < Size; i++)
+			{
+                ConsoleHelpers.GetIntegerInRange(value, 100);
+            }
+            return value;
+        }
+    }
 }

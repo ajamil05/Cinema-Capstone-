@@ -1,56 +1,100 @@
-﻿using System.Text;
+﻿using Capstone.Cinema_features;
+using System.Text;
 
 namespace Capstone.Menus
 {
-	/// <summary>
-	/// Represents an abstract base class for a console menu.
-	/// Inherits from <see cref="MenuItem"/> and contains a list of menu items.
-	/// </summary>
+    /// <summary>
+    /// Represents an abstract base class for console menu.
+    /// </summary>
 	abstract class ConsoleMenu : MenuItem
 	{
-		/// <summary>
-		/// A list of menu items contained in this console menu.
-		/// </summary>
+        // boolean That Decides Whether To Exit The Menu Or Not.
+        public bool IsActive { get; set; }
 
-		/// <summary>
-		/// Gets or sets a value indicating whether the menu is active.
-		/// This is toggled by the exit menu item, which allows thee user to exit the menu
-		/// </summary>
-		public bool IsActive { get; set; }
+        // abstract base method to create menu items
+        public abstract void CreateMenuItems();
 
         /// <summary>
-        /// Derived classes should override CreateMenu to add menu items to _menuItems.
+        /// Method That Does The Process Of Selecting The Menu Item.
         /// </summary>
-        public abstract void CreateMenu();
-
-		/// <summary>
-		/// Executes the action associated with selecting the console menu.
-		/// </summary>
 		public override void Select()
 		{
-			IsActive = true;
-			do
-			{
-				CreateMenu();
-				string output = $"{MenuText()}{Environment.NewLine}";
-				int selection = ConsoleHelpers.GetIntegerInRange(1, _menuItems.Count, this.ToString()) - 1;
-				_menuItems[selection].Select();
-			} while (IsActive);
-		}
+            // bool is True if the menu is active.
+            IsActive = true;
 
-		/// <summary>
-		/// Returns a string that represents the current console menu.
-		/// </summary>
-		/// <returns>A string representing the menu text and its items.</returns>
-		public override string ToString()
+
+            do // Loop To Implement The Menu Is Active.
+            {
+                // Clears MenuItems
+                Console.Clear();
+                _menuItems.Clear();
+
+                //Create MenuItems
+                CreateMenuItems();
+
+                //PreDisplay
+                PreDisplay();
+
+                //Displays MenuItems
+				Display();
+
+                //PostDisplay
+                PostProcess();
+
+		        //Asks For An Input
+				InputDisplay();
+			} while (IsActive); // Once IsActive is False, The Menu Will Exit.
+        }
+        /// <summary>
+        /// Displays before the menu items are shown.
+        /// </summary>
+		public virtual void PreDisplay()
 		{
-			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(MenuText());
-			for (int i = 0; i < _menuItems.Count; i++)
-			{
-				sb.AppendLine($"{i + 1}. {_menuItems[i].MenuText()}");
-			}
-			return sb.ToString();
+			Console.WriteLine(MenuTitleText());
 		}
-	}
+        /// <summary>
+        /// Displays the menu items.    
+        /// </summary>
+		public void Display()
+		{
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < _menuItems.Count; i++)
+            {
+                sb.AppendLine($"{i + 1}. {_menuItems[i].MenuTitleText()}");
+            }
+            Console.WriteLine(sb.ToString());
+        }
+        /// <summary>
+        /// Carrys Out a Specific Process after the menu items are shown.
+        /// </summary>
+		public virtual void PostProcess()
+		{
+			
+		}
+        /// <summary>
+        /// Prompts the user for input and selects the corresponding menu item Within a Specified Range.
+        /// </summary>
+		public void InputDisplay()
+		{
+            if (_menuItems.Count == 0)
+            {
+                Console.WriteLine("No menu items available. Returning to the previous menu...");
+                IsActive = false; // Exit the current menu
+                return;
+            }
+
+            Console.Write("Input: ");
+            int selection = ConsoleHelpers.GetIntegerInRange(1, _menuItems.Count) - 1;
+
+            if (selection >= 0 && selection < _menuItems.Count)
+            {
+                _menuItems[selection].Select();
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection. Please try again.");
+            }
+        }
+    }
 }

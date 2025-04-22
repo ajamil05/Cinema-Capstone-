@@ -1,70 +1,121 @@
 # Abstraction (10%)
 
-Here you should describe how you have used Inheritance for Code Reuse in your solution.
+# Code Snippet For Abstraction
+~~~cs
+internal abstract class MenuItem
+{
+    public List<MenuItem> _menuItems = new List<MenuItem>();
 
-You should use class diagrams and code snippets where appropriate.
+    /// <summary>
+    /// Executes the action associated with selecting the menu item.
+    /// </summary>
+    public abstract void Select();
 
-Here is an example of a code snippet in markdown
-
+    /// <summary>
+    /// Gets the text to be displayed for the menu item.
+    /// </summary>
+    /// <returns>A string representing the menu text.</returns>
+    public abstract string MenuTitleText();
+}
+~~~
 ```cs
 /// <summary>
-/// Prompts the user to enter an integer within a specified range.
+/// Represents an abstract base class for console menu.
 /// </summary>
-/// <param name="pMin">The minimum acceptable value (inclusive).</param>
-/// <param name="pMax">The maximum acceptable value (inclusive).</param>
-/// <param name="pMessage">The message to display to the user.</param>
-/// <returns>An integer entered by the user within the specified range.</returns>
-/// <exception cref="Exception">Thrown when the minimum value is greater than the maximum value.</exception>
-public static int GetIntegerInRange(int pMin, int pMax, string pMessage)
+abstract class ConsoleMenu : MenuItem
 {
-  if (pMin > pMax)
-  {
-    throw new Exception($"Minimum value {pMin} cannot be greater than maximum value {pMax}");
-  }
+    // boolean That Decides Whether To Exit The Menu Or Not.
+    public bool IsActive { get; set; }
 
-  int result;
+    // abstract base method to create menu items
+    public abstract void CreateMenuItems();
 
-  do
-  {
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.WriteLine(pMessage);
-    Console.WriteLine($"Please enter a number between {pMin} and {pMax} inclusive.");
+    /// <summary>
+    /// Method That Does The Process Of Selecting The Menu Item.
+    /// </summary>
+	public override void Select()
+	{
+        // bool is True if the menu is active.
+        IsActive = true;
 
-    Console.ForegroundColor = ConsoleColor.Green;
-    string userInput = Console.ReadLine();
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    try
-    {
-      result = int.Parse(userInput);
+
+        do // Loop To Implement The Menu Is Active.
+        {
+            // Clears MenuItems
+            Console.Clear();
+            _menuItems.Clear();
+
+            //Create MenuItems
+            CreateMenuItems();
+
+            //PreDisplay
+            PreDisplay();
+
+            //Displays MenuItems
+			Display();
+
+            //PostDisplay
+            PostDisplay();
+
+	        //Asks For An Input
+			InputDisplay();
+		} while (IsActive); // Once IsActive is False, The Menu Will Exit.
     }
-    catch
-    {
-      Console.WriteLine($"{userInput} is not a number");
-      continue;
-    }
+    /// <summary>
+    /// Displays before the menu items are shown.
+    /// </summary>
+	public virtual void PreDisplay()
+	{
+		Console.WriteLine(MenuTitleText());
+	}
+    /// <summary>
+    /// Displays the menu items.    
+    /// </summary>
+	public void Display()
+	{
+        StringBuilder sb = new StringBuilder();
 
-    if (result >= pMin && result <= pMax)
-    {
-      return result;
+        for (int i = 0; i < _menuItems.Count; i++)
+        {
+            sb.AppendLine($"{i + 1}. {_menuItems[i].MenuTitleText()}");
+        }
+        Console.WriteLine(sb.ToString());
     }
-    Console.WriteLine($"{result} is not between {pMin} and {pMax} inclusive.");
-  } while (true);
+    /// <summary>
+    /// Displays after the menu items are shown.
+    /// </summary>
+	public virtual void PostDisplay()
+	{
+		
+	}
+    /// <summary>
+    /// Prompts the user for input and selects the corresponding menu item Within a Specified Range.
+    /// </summary>
+	public void InputDisplay()
+	{
+        if (_menuItems.Count == 0)
+        {
+            Console.WriteLine("No menu items available. Returning to the previous menu...");
+            IsActive = false; // Exit the current menu
+            return;
+        }
+
+        Console.Write("Input: ");
+        int selection = ConsoleHelpers.GetIntegerInRange(1, _menuItems.Count) - 1;
+
+        if (selection >= 0 && selection < _menuItems.Count)
+        {
+            _menuItems[selection].Select();
+        }
+        else
+        {
+            Console.WriteLine("Invalid selection. Please try again.");
+        }
+    }
 }
 ```
+In This Code Snippet The Abstract Console Menu Class Is Inheriting From The Abstract Class MenuItem. Inside The Abstract MenuItem Class There Are Two Abstract Methods MenuTitleText Method And The Select Method. As Presented Both Methods From The Abstract MenuItem Class Are Being Updated/ Overrided In The Abstract Console Menu Class. Abstraction Is Shown By Implementing Essential Features And Removing Uneccssary Data To Create a Fully Functional User Interaction Menu Syestem Inside The Abstract Console Menu Class.
 
-Here is an example of a class diagram in markdown
+# Abstraction Class Digram
+![Abstraction Class Digram (1)](https://github.com/user-attachments/assets/9059fc7b-076b-4210-bf82-c59fb5a84685)
 
-```mermaid
-classDiagram
-  BaseClass <|-- DerivedClass
-  BaseClass *-- ComponentClass
-  class BaseClass{
-    -int privateDataMember
-    -ComponentClass component
-    +publicMethod()
-  }
-  class ComponentClass{
-  }
-  class DerivedClass{
-  }
-```

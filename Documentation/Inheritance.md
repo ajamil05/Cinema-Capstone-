@@ -1,70 +1,73 @@
 # Inheritance for Code Reuse (10%)
+~~~cs
+/// <summary>
+/// Represents a menu item for selecting a General staff member, inheriting from <see cref="ConsoleMenu"/>.
+/// </summary>
+class StaffSelectMenuItem : ConsoleMenu 
+{
+    // Initializes the Staffmanager Property as a Staff Parser Object.
+    public StaffParser.Staff StaffManager { get; }
 
-Here you should describe how you have used Inheritance for Code Reuse in your solution.
+    /// <summary>
+    /// Constructor for the <see cref="StaffSelectMenuItem"/> class.
+    /// Setting The StaffManager Property as a Staff Parser Object.
+    /// </summary>
+    /// <param name="staffManager"></param>
+    public StaffSelectMenuItem(StaffParser.Staff staffManager)
+    {
+        StaffManager = staffManager;
+    }
 
-You should use class diagrams and code snippets where appropriate.
-
-Here is an example of a code snippet in markdown
+    /// <summary>
+    /// Creates the menu by adding menu items.
+    /// </summary>
+    public override void CreateMenuItems()
+    {
+        _menuItems.Add(new TransactionMenuItem(StaffManager));
+        _menuItems.Add(new ExitMenuItem(this));
+    }
+    /// <summary>
+    /// Displays the menu text for the General staff member.
+    /// </summary>
+    /// <returns></returns>
+    public override string MenuTitleText()
+    {
+        return $"{StaffManager.StaffID} {StaffManager.Level} {StaffManager.FirstName} {StaffManager.LastName}";
+    }
+}
+~~~
 
 ```cs
 /// <summary>
-/// Prompts the user to enter an integer within a specified range.
+/// Represents a menu item for selecting a Manager staff member, inheriting from <see cref="StaffSelectMenuItem"/>.
 /// </summary>
-/// <param name="pMin">The minimum acceptable value (inclusive).</param>
-/// <param name="pMax">The maximum acceptable value (inclusive).</param>
-/// <param name="pMessage">The message to display to the user.</param>
-/// <returns>An integer entered by the user within the specified range.</returns>
-/// <exception cref="Exception">Thrown when the minimum value is greater than the maximum value.</exception>
-public static int GetIntegerInRange(int pMin, int pMax, string pMessage)
+internal class ManagerSelectMenuItem : StaffSelectMenuItem
 {
-  if (pMin > pMax)
-  {
-    throw new Exception($"Minimum value {pMin} cannot be greater than maximum value {pMax}");
-  }
-
-  int result;
-
-  do
-  {
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.WriteLine(pMessage);
-    Console.WriteLine($"Please enter a number between {pMin} and {pMax} inclusive.");
-
-    Console.ForegroundColor = ConsoleColor.Green;
-    string userInput = Console.ReadLine();
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    try
+    /// <summary>
+    /// Constructor for the <see cref="ManagerSelectMenuItem"/> class.
+    /// Inhertits the staffManager Property from the StaffSelectMenuItem class.
+    /// </summary>
+    /// <param name="staffManager"></param>
+    public ManagerSelectMenuItem(StaffParser.Staff staffManager) : base(staffManager)
     {
-      result = int.Parse(userInput);
-    }
-    catch
-    {
-      Console.WriteLine($"{userInput} is not a number");
-      continue;
-    }
 
-    if (result >= pMin && result <= pMax)
-    {
-      return result;
     }
-    Console.WriteLine($"{result} is not between {pMin} and {pMax} inclusive.");
-  } while (true);
+    /// <summary>
+    /// Creates the menu by adding menu items specific to the Manager role.
+    /// </summary>
+    public override void CreateMenuItems()
+    {
+        _menuItems.Add(new EditScheduleofScreeningsMenuItem());
+        _menuItems.Add(new AddStaffMenuItem());
+        _menuItems.Add(new RemoveStaffMenuItem());
+        _menuItems.Add(new AddconcessionMenuItem());
+        _menuItems.Add(new RemoveConcessionsMenuItem());
+        _menuItems.Add(new EditConcessionMenuItem());
+        base.CreateMenuItems();
+    }
 }
 ```
+The Code Above Shows That The ManagerSelectMenuItem Is Being Inherited From The Parent Class StaffSelectMenuItem. This Is Displayed Because Inside The ManagerSelectMenuItem There Is The Key Word "base" Which access Member's From The StaffSelectMenuItem. The Programmer Has Also Shown Reusing Code Since a Manager Can Do Everything a General Staff Can. Thus The Menu Syestem That The StaffSelectMenuItem Accomplishes Is Implemented In ManagerSelectMenuItem Class By Using "base.CreateMenuItems". Another Example Of Resuing Code In This Program Is Referencing The StaffParser Class In The StaffSelectMenuItem Class To Output The Data Of The Staff Members In The Set File. Another Point That This Code Portrays Inheritance Is The : Between The Child Class ManagerSelectMenuItem and Parent Class StaffSelectMenuItem. 
 
-Here is an example of a class diagram in markdown
-
-```mermaid
-classDiagram
-  BaseClass <|-- DerivedClass
-  BaseClass *-- ComponentClass
-  class BaseClass{
-    -int privateDataMember
-    -ComponentClass component
-    +publicMethod()
-  }
-  class ComponentClass{
-  }
-  class DerivedClass{
-  }
-```
+# Class Diagram
+![Inheritance And Reuse Code Class Diagram](https://github.com/user-attachments/assets/f8c547cc-4ed4-4172-9868-a5808f74383f)

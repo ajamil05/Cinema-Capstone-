@@ -1,0 +1,8 @@
+[Concession:Popcorn%Price:250]
+[Concession:Soda%Price:220]
+[Concession:Carmel Popcorn%Price:240]
+[Concession:Nachos%Price:12]
+[Concession:Coke%Price:27]
+[Concession:Large soda%Price:98]
+[Concession:Chocolate%Price:56]
+[Concession:Skittles%Price:137]

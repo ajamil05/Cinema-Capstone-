@@ -1,70 +1,151 @@
 # Polymorphism (10%)
-
-Here you should describe how you have used Polymorphism in your solution.
-
-You should use class diagrams and code snippets where appropriate.
-
-Here is an example of a code snippet in markdown
-
 ```cs
+    /// <summary>
+    /// Represents an abstract base class for console menu.
+    /// </summary>
+	abstract class ConsoleMenu : MenuItem
+	{
+        // boolean That Decides Whether To Exit The Menu Or Not.
+        public bool IsActive { get; set; }
+
+        // abstract base method to create menu items
+        public abstract void CreateMenuItems();
+
+        /// <summary>
+        /// Method That Does The Process Of Selecting The Menu Item.
+        /// </summary>
+		public override void Select()
+		{
+            // bool is True if the menu is active.
+            IsActive = true;
+
+
+            do // Loop To Implement The Menu Is Active.
+            {
+                // Clears MenuItems
+                Console.Clear();
+                _menuItems.Clear();
+
+                //Create MenuItems
+                CreateMenuItems();
+
+                //PreDisplay
+                PreDisplay();
+
+                //Displays MenuItems
+				Display();
+
+                //PostDisplay
+                PostProcess();
+
+		        //Asks For An Input
+				InputDisplay();
+			} while (IsActive); // Once IsActive is False, The Menu Will Exit.
+        }
+        /// <summary>
+        /// Displays before the menu items are shown.
+        /// </summary>
+		public virtual void PreDisplay()
+		{
+			Console.WriteLine(MenuTitleText());
+		}
+        /// <summary>
+        /// Displays the menu items.    
+        /// </summary>
+		public void Display()
+		{
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < _menuItems.Count; i++)
+            {
+                sb.AppendLine($"{i + 1}. {_menuItems[i].MenuTitleText()}");
+            }
+            Console.WriteLine(sb.ToString());
+        }
+        /// <summary>
+        /// Displays after the menu items are shown.
+        /// </summary>
+		public virtual void PostProcess()
+		{
+			
+		}
+        /// <summary>
+        /// Prompts the user for input and selects the corresponding menu item Within a Specified Range.
+        /// </summary>
+		public void InputDisplay()
+		{
+            if (_menuItems.Count == 0)
+            {
+                Console.WriteLine("No menu items available. Returning to the previous menu...");
+                IsActive = false; // Exit the current menu
+                return;
+            }
+
+            Console.Write("Input: ");
+            int selection = ConsoleHelpers.GetIntegerInRange(1, _menuItems.Count) - 1;
+
+            if (selection >= 0 && selection < _menuItems.Count)
+            {
+                _menuItems[selection].Select();
+            }
+            else
+            {
+                Console.WriteLine("Invalid selection. Please try again.");
+            }
+        }
+    }
+```
+~~~cs
 /// <summary>
-/// Prompts the user to enter an integer within a specified range.
+/// Represents a menu item for finalising a transaction. Inherting from <see cref="ConsoleMenu"/>.
 /// </summary>
-/// <param name="pMin">The minimum acceptable value (inclusive).</param>
-/// <param name="pMax">The maximum acceptable value (inclusive).</param>
-/// <param name="pMessage">The message to display to the user.</param>
-/// <returns>An integer entered by the user within the specified range.</returns>
-/// <exception cref="Exception">Thrown when the minimum value is greater than the maximum value.</exception>
-public static int GetIntegerInRange(int pMin, int pMax, string pMessage)
+class FinaliseTransactionMenuItem : ConsoleMenu
 {
-  if (pMin > pMax)
-  {
-    throw new Exception($"Minimum value {pMin} cannot be greater than maximum value {pMax}");
-  }
-
-  int result;
-
-  do
-  {
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    Console.WriteLine(pMessage);
-    Console.WriteLine($"Please enter a number between {pMin} and {pMax} inclusive.");
-
-    Console.ForegroundColor = ConsoleColor.Green;
-    string userInput = Console.ReadLine();
-    Console.ForegroundColor = ConsoleColor.Yellow;
-    try
+    /// <summary>
+    /// Creating Menu Items for the Finalise Transaction Menu.
+    /// </summary>
+    public override void CreateMenuItems()
     {
-      result = int.Parse(userInput);
+        _menuItems.Add(new ConfirmPaymentmenuItemcs());
+        _menuItems.Add(new ExitMenuItem(this));
     }
-    catch
+    /// <summary>
+    /// Displays the menu text for finalising a transaction.
+    /// </summary>
+    /// <returns></returns>
+    public override string MenuTitleText()
     {
-      Console.WriteLine($"{userInput} is not a number");
-      continue;
+        return "Finalise Transaction";
     }
-
-    if (result >= pMin && result <= pMax)
+    /// <summary>
+    /// Asks the user if they would like to finalise their transaction.
+    /// </summary>
+    public override void PostProcess()
     {
-      return result;
+        Console.WriteLine("Would You Like To Finalise Your Transaction Yes Or No");
+
+        string input = Console.ReadLine();
+        // Check if the input is "Yes" or "No"
+
+        if (input == "Yes")
+        {
+            // Creating an instance of the Transactional class and calling the TotalPrice method
+            Transactional transactional = new Transactional();
+
+            transactional.TotalPrice();
+        }
+        else if (input == "No")
+        {
+            Console.WriteLine("Transaction Not Finalised");
+        }
+        else
+        {
+            // If the input is not "Yes" or "No", restart the method
+            PostProcess();
+        }
     }
-    Console.WriteLine($"{result} is not between {pMin} and {pMax} inclusive.");
-  } while (true);
-}
-```
+~~~
+In The Code Above Polymorphism Is Applied Since There Are Two Virtual Methods PreDisplay And PostProcess. Virtual Means That The Method Is Now a Base Method. In All Of My MenuItem Classes They Inherit From The ConsoleMenu Class, This Allows The Developer To Override The Virtual Methods In The MenuItem Classes. Override Means To Update The Specific Method. As The Sofrtware Engineer Has Shown Inside The FinaliseTransactionMenuItem The PostProcess Method Is Being Overrided Therefore Allowing PostProcess Method To Have Mutliple Implementations For a Particular Functionality.
 
-Here is an example of a class diagram in markdown
-
-```mermaid
-classDiagram
-  BaseClass <|-- DerivedClass
-  BaseClass *-- ComponentClass
-  class BaseClass{
-    -int privateDataMember
-    -ComponentClass component
-    +publicMethod()
-  }
-  class ComponentClass{
-  }
-  class DerivedClass{
-  }
-```
+# Class Diagram
+![Polymorphism Class Diagram](https://github.com/user-attachments/assets/80edfffd-b2f8-4a81-ab37-6ebcc9d15f47)

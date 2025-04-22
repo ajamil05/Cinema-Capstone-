@@ -8,11 +8,11 @@
 		// The parent in the menu hierarchy (not the base class) menu that will be exited if this item is selected
 		private ConsoleMenu _menu;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ExitMenuItem"/> class.
-		/// </summary>
-		/// <param name="parentItem">The parent menu that this item belongs to.</param>
-		public ExitMenuItem(ConsoleMenu parentItem)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExitMenuItem"/> class with a specified parent menu.
+        /// </summary>
+        /// <param name="parentItem"></param>
+        public ExitMenuItem(ConsoleMenu parentItem)
 		{
 			_menu = parentItem;
 		}
@@ -21,13 +21,13 @@
 		/// Gets the text to be displayed for the exit menu item.
 		/// </summary>
 		/// <returns>A string representing the menu text.</returns>
-		public override string MenuText()
+		public override string MenuTitleText()
 		{
 			return "Exit";
 		}
 
 		/// <summary>
-		/// Exits the parent menu
+		/// Exits the menu
 		/// </summary>
 		public override void Select()
 		{
