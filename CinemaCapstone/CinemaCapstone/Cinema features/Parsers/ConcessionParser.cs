@@ -35,6 +35,10 @@ namespace Capstone.Cinema_features
             // Read all lines from the file
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Split the line into parts based on the '%' character and trim the brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -50,16 +54,22 @@ namespace Capstone.Cinema_features
                     // Check if the keyValue array has exactly two elements
                     if (keyValue.Length == 2)
                     {
-                        // Assigning values to the ConcessionData object based on the key
-                        switch (keyValue[0])
+                        if (keyValue[0] == "Concession")
                         {
-                            case "Concession":
-                                Concessions.Concession = keyValue[1];
-                                break;
-                            case "Price":
-                                Concessions.Price = keyValue[1];
-                                break;
+                            Concessions.Concession = keyValue[1];
                         }
+                        else if (keyValue[0] == "Price")
+                        {
+                            Concessions.Price = keyValue[1];
+                        }
+                        else
+                        {
+                            Exception();
+                        }
+                    }
+                    else
+                    {
+                        Exception();
                     }
                 }
                 // Add the populated ConcessionData object to the list
@@ -67,6 +77,14 @@ namespace Capstone.Cinema_features
             }
             // Return the list of ConcessionData objects
             return ConcessionDataList;
+        }
+        /// <summary>
+        /// This method handles the exception when the format of the concession data is invalid.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Concession:CONCESSION%Price:PRICE]");
+            Environment.Exit(0);
         }
     }
 }

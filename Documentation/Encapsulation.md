@@ -1,6 +1,6 @@
 # Encapsulation and Cohesion (10%)
 
-# Code Showcasing Encapsulation And Cohesion
+## Code Showcasing Encapsulation And Cohesion
 ```cs
  /// <summary>
  /// This class is responsible for parsing the name of the cinema from a text file.
@@ -62,7 +62,8 @@
      }
  }
 ```
+## Explain On How Encapsulation Is Accomplished
 In The Program Above It's Retrieving The Name Of The Cinema Application Which Is Hullywood Cinema From a File By Using a Parser. The Class is Static Meaning Multiple Instances Of a Class Isn't Possible. Methods And Member Varaibles Have To Be Identified As Static. Encapsulation Is Applied Above Since The Member Varaible "path" Is Private Making It an Internal State, Allowing It To Only Be Specific Towards The Class. Cohesion Is Executed Because The Attributes Of The Class Allow a Certain Purpose To Be Fulfilled. 
 
-# Class Diagram For Encapsulation And Cohesion
+## Class Diagram For Encapsulation And Cohesion
 ![Encapsulation And Cohesion Class Digram (1)](https://github.com/user-attachments/assets/fd1a1854-f747-43fc-8d4c-fcca8b1d5f05)

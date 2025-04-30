@@ -1,5 +1,5 @@
-[Month:April%Day:10%Year:2025%Time:13 35%Screening:A]
-[Month:April%Day:11%Year:2025%Time:3 5AM%Screening:C]
+[Month:April%Day:10%Year:2025%Time:12 50%Screening:B]
+[Month:April%Day:11%Year:2025%Time:14 50%Screening:A]
 [Month:April%Day:12%Year:2025%Time:06 30%Screening:A]
 [Month:April%Day:10%Year:2025%Time:23 35%Screening:C]
 [Month:April%Day:11%Year:2025%Time:04 30%Screening:B]

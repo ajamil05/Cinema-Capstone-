@@ -84,6 +84,10 @@ namespace Capstone.Cinema_features
             // Reading all lines from the file
             foreach (string line in File.ReadAllLines(filePath))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Splitting the line by '%' and removing the brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -120,38 +124,13 @@ namespace Capstone.Cinema_features
             // Returning the list of seats
             return seats;
         }
-
-        //private static int valueToAdd;
-        //public static string Premium()
-        //{
-        //    using (StreamReader streamreader = new StreamReader(filePath))
-        //    {
-        //        string seats = streamreader.ReadLine();
-        //        int Premium = int.Parse(seats);
-        //        valueToAdd = ConsoleHelpers.GetIntegerInRange(0, Premium);
-        //        return "";
-        //    }
-        //}
-        //public static string Standard()
-        //{
-        //    using (StreamReader streamreader = new StreamReader(filePath))
-        //    {
-        //        string seats = streamreader.ReadLine();
-        //        string seats2 = streamreader.ReadLine();
-        //        int Standard = int.Parse(seats2);
-        //        valueToAdd = ConsoleHelpers.GetIntegerInRange(0, Standard);
-        //        return "";
-        //    }
-        ////}
-        //public static int AgeCheck(int Age)
-        //{
-        //    for (int i = 0; i < valueToAdd; i++)
-        //    {
-        //        int valueToAdd = ConsoleHelpers.GetIntegerInRange(Age, 100);
-        //        Console.WriteLine("You Have a Suitable Age To Watch The Film");
-
-        //    }
-        //    return Age;
-        //}
+        /// <summary>
+        /// This method is called when the file format is invalid.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Screen:{SCREEN} NumPremiumSeat:{NUMBEROFPREMIUMSEATS} NumStandardSeat:{NUMBEROFSTANDARDSEATS}]");
+            Environment.Exit(0);
+        }
     }
 }

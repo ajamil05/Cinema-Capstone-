@@ -38,6 +38,10 @@ namespace Capstone.Cinema_features.Parsers
             // Read all lines from the file
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Split the line into parts based on the '%' character and remove brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -73,12 +77,24 @@ namespace Capstone.Cinema_features.Parsers
                                 break;
                         }
                     }
+                    else
+                    {
+                        Exception();
+                    }
                 }
                 // Adding the Data To the List
                 ScheduleDataList.Add(Schedules);
             }
             // Returning the list of schedules
             return ScheduleDataList;
+        }
+        /// <summary>
+        /// This method is called when the file format is invalid.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Month:{MONTH} Day:{DAY} Year:{YEAR} Time:{TIME} Screening:{SCREENING}]");
+            Environment.Exit(0);
         }
     }
 }

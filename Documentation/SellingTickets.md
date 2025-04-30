@@ -1,5 +1,9 @@
 # Selling Tickets To A Customer Worflow
 
+## Step By Step Guide To Complete The Workflow
+
+The Code Editor Has Made It An Prioity To Put All The Files Inside The Resources Folder Into The bin, debug, net8.0 File. 
+
 ![Screenshot 2025-04-18 135236](https://github.com/user-attachments/assets/7fab9af7-ba37-4acc-a46f-89aafadd1348)
 
 Any Staff Member Can Sell You Tickets. Therefore The User Can Select Any Staff. 
@@ -71,6 +75,16 @@ public void FinaliseTransaction()
 The User can Input Yes They Would Like To Finialise The Tranaction Or Input No.
 
 ![image](https://github.com/user-attachments/assets/41d63c06-cd15-476b-89fb-ea1a5472f9e1)
+
+## Functionality Of Workflow
+~~~cs
+ private static void Exception()
+ {
+     Console.WriteLine("Invalid Formatt:[Movie:{MOVIE} Length:{LENGTH} Genre:{GENRE} Rating:{RATING}]");
+     Environment.Exit(0);
+ }
+~~~
+Restricts Invalid Data From Loading Into The Console.
 ```cs
             public List<int> TotalPrice()
             {
@@ -201,27 +215,6 @@ If Input is Yes Then The Program Would Output Your Transaction Details Calculate
 In The Seats.txt File The Programmer Has Created This File To Allow The Program To Update The Tickets Availble And Save The Updated Information About Screenings.
 
 Additionally The Staff Level Manager Can Set Daily Schedules According To Scheduling Rules Which Is Basiaclly Editing Schedule Of Screenings. The Manager Can Also Add, Edit And Remove Concession Names And Prices According To Scheduling Rules. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

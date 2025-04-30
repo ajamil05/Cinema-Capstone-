@@ -1,8 +1,12 @@
 # Gold MemberShip Workflow 
 
+## Step By Step Guide To Work Through The Workflow
+
+In This Program The Programmer Has Made It a Prority That The User Puts The File, Membership.txt in The Filepath bin, debug, net8.0 File.
+
 ![Screenshot 2025-04-18 135236](https://github.com/user-attachments/assets/a560db82-fc13-4800-b98a-6424ae0440bc)
 
-The User Should Pick a Staff. Both Staff Levels Can Complete The Gold Membership Worflow. 
+The User Should Pick a Staff Member. Both Staff Levels Can Complete The Gold Membership Worflow. 
 
 ![Screenshot 2025-04-18 135415](https://github.com/user-attachments/assets/a6844e75-924b-4281-8c23-ce4da57e9493)
 
@@ -16,88 +20,79 @@ In The Image Above The Membership Option Should be Selected To Procced To Loyali
 
 The Reviewer Of My Program Should Select Gold Membership. 
 
+![image](https://github.com/user-attachments/assets/9a4c7733-0449-42dd-af91-3c3bd12a64db)
+
+The User Can Now Select Any Loyality Member To Convert Towards a Gold Member. Therefore In The Image Above The Coder Is Also Loading The Members. 
+
+## Functionality Applied Towards Workflow
 ~~~cs
- foreach(var Gold in gold)
+ private static void Exception()
  {
-     if (Gold.Member == "Loyality")
-     {
-         Console.WriteLine($"{Gold.MemberID} - Firstname:{Gold.Firstname} Lastname:{Gold.Lastname} Email Address:{Gold.Email} Member:{Gold.Member} Visted:{Gold.Visted}");
-     }
-     if (Gold.Member == "Gold")
-     {
-         Console.WriteLine($"{Gold.MemberID} - Firstname:{Gold.Firstname} Lastname:{Gold.Lastname} Email Address:{Gold.Email} Member:{Gold.Member} Visted:{Gold.Visted} MemberShipEndDate:{year}");
-     }
+     Console.WriteLine("Invalid Formatt:[Movie:{MOVIE} Length:{LENGTH} Genre:{GENRE} Rating:{RATING}]");
+     Environment.Exit(0);
  }
 ~~~
-
-Loads The Information of Gold Members and Loyality Members.
-
-![image](https://github.com/user-attachments/assets/a6d302a2-1fce-43d0-ac76-1cf360102e6c)
-
-![image](https://github.com/user-attachments/assets/8f545066-0d8e-4979-aa40-a73f4cb4d383)
+Forbids Invalid Data From Loading Into The Console. 
 ~~~cs
-            Console.WriteLine("Would You Like To Join Gold Member Its £89 Per Year Yes Or No");
-            string SellMembership = Console.ReadLine();
+ var Day = DateTime.Now.Day;
+
+ var Month = DateTime.Now.Month;
+
+ var Year = DateTime.Now.Year + 1;
+
+ string MembershipEndDate = $"{Day}.{Month}.{Year}";
+
+ string currentDate = DateTime.Now.ToString("yyyy/MM/dd");
 ~~~
+In The Code Snippet Above The Software Developer Has Created a MemberShip End Date And The Current Date.
 
-Inputting From The User If They would Like To Join The Gold Membership From a Loyality Scheme.
 ~~~cs
- if (SellMembership == "Yes")
+// Read existing data from the file
+var existingData = File.Exists(filepath) ? File.ReadAllLines(filepath) : Array.Empty<string>();
+
+var ExistingData = File.Exists(path) ? File.ReadAllLines(path) : Array.Empty<string>();
+
+// Prepare the new data to write
+string newdata = $"[MemberID:{Gold.MemberID}%Firstname:{Gold.Firstname}%Lastname:{Gold.Lastname}%Email:{Gold.Email}%Member:Gold%MemberShipEndDate:{MembershipEndDate}%Visted:{Gold.Visted}]";
+
+ if (!existingData.Contains(newdata))
  {
-     // Opening the Membership.txt file and Converting the loyality member to a gold member
-     StreamWriter sw = new StreamWriter(filepath);
-
-     foreach (var i in gold)
+     // Append the new data only if it doesn't already exist
+     using (StreamWriter streamWriter = new StreamWriter(filepath, true))
      {
-         sw.WriteLine($"[MemberID:{i.MemberID}%FirstName:{i.Firstname}%LastName:{i.Lastname}%Email:{i.Email}%Member:Gold%Visted:{i.Visted}%MemberShipEndDate:{year}]");
+         streamWriter.WriteLine(newdata);
 
-         // Checking if the current date is equal to the membership end date
-         if (currentDate == year)
+         if (MembershipEndDate == currentDate)
          {
-             // Stays a loyality member
-             sw.WriteLine($"[MemberID:{i.MemberID}%FirstName:{i.Firstname}%LastName:{i.Lastname}%Email:{i.Email}%Member:Loyality%Visted:{i.Visted}]");
-         }
-         // Adding the new data to the transaction.txt file if they are a Gold Member
-         var existingData = File.Exists(path) ? File.ReadAllLines(path) : Array.Empty<string>();
-
-         string newData = $"{i.Firstname} {i.Lastname} (Gold)";
-
-         // Check if the data already exists
-         if (!existingData.Contains(newData))
-         {
-             // Append the new data only if it doesn't already exist
-             using (StreamWriter streamWriter = new StreamWriter(path, true))
-             {
-                 streamWriter.WriteLine(newData);
-             }
+             streamWriter.WriteLine($"[MemberID:{Gold.MemberID}%Firstname:{Gold.Firstname}%Lastname:{Gold.Lastname}%Email:{Gold.Email}%Member:Loyality%Visted:{Gold.Visted}]");
          }
      }
-     // Closing the file
-     sw.Close();
  }
 ~~~
 
-If Input Is Yes Then It Would Add That Member As a Gold Member. 
+![image](https://github.com/user-attachments/assets/42325808-ef7f-4a3a-b714-8837b748ec60)
+
+Once a Member Is Selected To Convert From a Loyality Member To a Gold Member. It Appends The Data Of The User Selected as a Gold Member, But If That Member Already Exists as a Gold Member It Doesn't. If The Membership End Date Is Equal To The Current Date Then The Member That Was Selected Would Remain a Loyality Member. 
+
 ~~~cs
- else if (SellMembership == "No")
+ // Checking if the member is Gold and has a visted count of 10
+ else if (i.Member == "Gold" && i.Visted == "10")
  {
-     Console.WriteLine("You Have Chosen Loyality Scheme");
+     // apply the benefits
+     standardprice = 0;
+     totalConcessions = totalConcessions * 0.25f;
+     totalprice = standardprice + premiumprice + totalConcessions + GoldannualMembershipPrice;
+
  }
- else
+ // Checking if the member is a Gold member
+ else if(i.Member == "Gold")
  {
-     // restarts the method if the input is not valid
-     Gold();
+     // apply the benefits
+     totalConcessions = totalConcessions * 0.25f;
+     totalprice = standardprice + premiumprice + totalConcessions + GoldannualMembershipPrice;
  }
 ~~~
-If Input Is No The Loyality Scheme Member will Stay a Loyality Scheme Member. If Its None Of The Inputs "Yes" Or "No" It Restarts The Method. This Term Is Called Recusrsion. Reursion Is a Function That Is Calling Itself. 
-
-
-
-
-
-
-
-
+Applying The Benefits For a Gold Member In The Transaction. Implementing Functionality For 25% Discount On All Concessions And Loyality Scheme Benefits Too. 
 
 
 

@@ -38,6 +38,10 @@ namespace Capstone.Menus
             // Read all lines from the file and parse each line
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Trim the line and split it into parts
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -70,12 +74,25 @@ namespace Capstone.Menus
                                 break;
                         }
                     }
+                    else
+                    {
+                        // If the key-value pair is not valid, call the Exception method
+                        Exception();
+                    }
                 }
                 // Add the parsed MovieData object to the list
                 MovieDataList.Add(MovieData);
             }
             // Return the list of parsed movie data
             return MovieDataList;
+        }
+        /// <summary>
+        /// This method is called when the format of the data in the file is invalid.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Movie:{MOVIE} Length:{LENGTH} Genre:{GENRE} Rating:{RATING}]");
+            Environment.Exit(0);
         }
     }
 }

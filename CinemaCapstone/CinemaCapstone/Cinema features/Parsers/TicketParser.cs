@@ -35,6 +35,10 @@ namespace Capstone.Menus
             // Read all lines from the Ticket file
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Split the line into parts using the '%' character and remove the brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -61,12 +65,21 @@ namespace Capstone.Menus
                                 break;
                         }
                     }
+                    else
+                    {
+                        Exception();
+                    }
                 }
                 // Add the populated TicketData object to the list
                 ticketDataList.Add(ticketData);
             }
             // Return the list of ticket data
             return ticketDataList;
+        }
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Ticket:{TICKETTYPE} Price:{PRICE}]");
+            Environment.Exit(0);
         }
     }
 }

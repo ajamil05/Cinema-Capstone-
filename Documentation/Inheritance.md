@@ -1,4 +1,6 @@
 # Inheritance for Code Reuse (10%)
+
+## Code Showing Inheritance
 ~~~cs
 /// <summary>
 /// Represents a menu item for selecting a General staff member, inheriting from <see cref="ConsoleMenu"/>.
@@ -67,7 +69,8 @@ internal class ManagerSelectMenuItem : StaffSelectMenuItem
     }
 }
 ```
+## Explain On How Inheritance Is Applied
 The Code Above Shows That The ManagerSelectMenuItem Is Being Inherited From The Parent Class StaffSelectMenuItem. This Is Displayed Because Inside The ManagerSelectMenuItem There Is The Key Word "base" Which access Member's From The StaffSelectMenuItem. The Programmer Has Also Shown Reusing Code Since a Manager Can Do Everything a General Staff Can. Thus The Menu Syestem That The StaffSelectMenuItem Accomplishes Is Implemented In ManagerSelectMenuItem Class By Using "base.CreateMenuItems". Another Example Of Resuing Code In This Program Is Referencing The StaffParser Class In The StaffSelectMenuItem Class To Output The Data Of The Staff Members In The Set File. Another Point That This Code Portrays Inheritance Is The : Between The Child Class ManagerSelectMenuItem and Parent Class StaffSelectMenuItem. 
 
 # Class Diagram
-![Inheritance And Reuse Code Class Diagram](https://github.com/user-attachments/assets/f8c547cc-4ed4-4172-9868-a5808f74383f)
+![Inheritance Class Diagram](https://github.com/user-attachments/assets/9272cc71-4c63-47e7-977b-e4db561a0028)

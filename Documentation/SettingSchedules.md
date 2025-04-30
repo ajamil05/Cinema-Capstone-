@@ -1,17 +1,30 @@
 # Schedule Of Screenings Worflow
 
+## Step By Step Guide Towards The Specific Workflow
+
+The Sotfware Developer Has Made This a Priority To Put All The .fs Extension Files Into The bin, debug, net8.0 File. 
+
 ![Screenshot 2025-04-18 135236](https://github.com/user-attachments/assets/9b1193d7-5341-48f4-aa09-6652fb609716)
 
 The Programmer Shows That Manager And General Level Staff Are Loaded Into The Console. The User Should Select a Manager. 
 
 ![image](https://github.com/user-attachments/assets/46e57287-9de6-4a95-ae36-ea1a7e0c6b16)
 
-In The Image Above The User Can See That The Programmer Has Impemented Different Atrributes Towarda a Manager. a Manager Can Edit Concession And Prices, Add and Remove Staff and Lastly Edit The Schedule of Screenings. The User Should Procced To Select Edit Schedule of Screenings. 
+In The Image Above The User Can See That The Programmer Has Impemented Different Atrributes Towarda a Manager. a Manager Can Edit, Add And Remove Concession Names And Prices, Add and Remove Staff and Lastly Edit The Schedule of Screenings. The User Should Procced To Select Edit Schedule of Screenings. 
 
 ![image](https://github.com/user-attachments/assets/b42890db-bc19-4c1e-8894-7cf50e5e1414)
 
 In The Portait Above The User Can Choose a Any Schedule Of Screening To Edit. 
 
+## Functionality Of Workflow
+~~~cs
+ private static void Exception()
+ {
+     Console.WriteLine("Invalid Formatt:[Movie:{MOVIE} Length:{LENGTH} Genre:{GENRE} Rating:{RATING}]");
+     Environment.Exit(0);
+ }
+~~~
+Prevents Invalid Data From Loading Into The Console.
 ![image](https://github.com/user-attachments/assets/56ce3797-0dcc-4abd-b8ba-17ba423cccdd)
 ~~~cs
  Console.WriteLine("Enter a Screen A, B Or C");
@@ -62,7 +75,7 @@ if (Hours < 0 || Hours > 24 && Minutes < 0 || Minutes > 60)
 // Combinding Hours and Minutes Into a String
 string Time = $"{Hours} {Minutes}";
 ~~~
-The User Should Enter The Specific Screen, What Time As Serprate Inputs as Hours And Minutes. So Let Say You Want To Watcha Movie At 1pm, The User Should Enter It As The Screenshot Above. The Programmer Has Added Validation Checks To Make Sure The Program Doesn't Take Invalid Inputs.
+The User Should Enter The Specific Screen , The Time As Serprate Inputs as Hours And Minutes. So Let Say You Want To Watch a Movie At 1pm, The User Should Enter It As The Screenshot Above. The Programmer Has Added Validation Checks To Make Sure The Program Doesn't Take Invalid Inputs.
 ~~~cs
  if (screen == schedule.Screening && Time == schedule.Time)
  {
@@ -108,10 +121,10 @@ Once The User Had Already Selcted The Specific Schedule Of Screening To Edit The
 
 The Constructor of This Code Has Created a File That Stores All The Schedule Of Screenings In a .fs extension File. This allows any Staff Member To Load The Schedule Of Screenings Into The Console. By Accessing The Specific File Shown Above. 
 
-![image](https://github.com/user-attachments/assets/695de702-78d0-4eab-97bd-181e3763e3ea)
+![image](https://github.com/user-attachments/assets/c4d7aeb7-9afd-462b-b0b7-c6b9d3a3c237)
 
-![image](https://github.com/user-attachments/assets/3e48b1be-8fe4-4b0a-8dd6-349547b8b950)
+![image](https://github.com/user-attachments/assets/2d850277-adb0-4eb5-b519-2635ec1375dd)
 
-![image](https://github.com/user-attachments/assets/4a1c2e5d-c5d3-45bd-bf70-8a8bcf6b2ceb)
+![image](https://github.com/user-attachments/assets/a9cc0a11-de4d-4769-b655-887633e635e2)
 
 The Coder Has Created Files Based On The Specific Dates Indicated In The Filename. Storing The Specific Timings And Screenings For The Specific Dates In The File. 

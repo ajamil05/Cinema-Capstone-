@@ -41,6 +41,10 @@ namespace Capstone.Cinema_features.Parsers
             // Read all lines from the file and parse each line
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Split the line into parts based on the delimiter '%' and remove brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -82,12 +86,24 @@ namespace Capstone.Cinema_features.Parsers
                                 break;
                         }
                     }
+                    else
+                    {
+                        Exception();
+                    }
                 }
                 // Add the parsed MembershipData object to the list
                 MemberShipDataList.Add(MemberShip);
             }
             // Return the list of membership data
             return MemberShipDataList;
+        }
+        /// <summary>
+        /// Method to handle exceptions when parsing the membership data.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[MemberID:{MEMBERID} Firstname:{FIRSTNAME} Lastname:{LASTNAME} Email:{EMAIL ADDRESS} Member:{MEMBER} Visted:{VISTED}]");
+            Environment.Exit(0);
         }
     }
 }

@@ -1,4 +1,6 @@
 # Polymorphism (10%)
+
+## Code Snippet For Polymorphism
 ```cs
     /// <summary>
     /// Represents an abstract base class for console menu.
@@ -145,7 +147,9 @@ class FinaliseTransactionMenuItem : ConsoleMenu
         }
     }
 ~~~
+
+## Explain On How Polymorphism Is Implemented
 In The Code Above Polymorphism Is Applied Since There Are Two Virtual Methods PreDisplay And PostProcess. Virtual Means That The Method Is Now a Base Method. In All Of My MenuItem Classes They Inherit From The ConsoleMenu Class, This Allows The Developer To Override The Virtual Methods In The MenuItem Classes. Override Means To Update The Specific Method. As The Sofrtware Engineer Has Shown Inside The FinaliseTransactionMenuItem The PostProcess Method Is Being Overrided Therefore Allowing PostProcess Method To Have Mutliple Implementations For a Particular Functionality.
 
-# Class Diagram
-![Polymorphism Class Diagram](https://github.com/user-attachments/assets/80edfffd-b2f8-4a81-ab37-6ebcc9d15f47)
+## Class Diagram
+![Polymorphism Class Diagram (2)](https://github.com/user-attachments/assets/f5c3fd6b-a532-4c01-a850-93719b131826)

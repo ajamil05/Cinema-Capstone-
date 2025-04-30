@@ -1,5 +1,6 @@
 ﻿using Capstone.Cinema_features;
 using Capstone.Cinema_features.Parsers;
+using Capstone.Menus.MemberShip_Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Capstone.Menus
     class LoyalityMemberShipMenuItem : ConsoleMenu
     {
         // path to the file containing membership information
-        private string filepath = $@"{Environment.CurrentDirectory}\Resources\Membership.txt";
+        
 
         // path to the file containing transaction information
         private static string path = $@"{Environment.CurrentDirectory}\Resources\Transaction.txt";
@@ -25,7 +26,8 @@ namespace Capstone.Menus
         /// </summary>
         public override void CreateMenuItems()
         {
-            
+            _menuItems.Add(new CreateANewUserMenuItem());
+            _menuItems.Add(new ExitMenuItem(this));
         }
         /// <summary>
         /// This method displays the menu text for the loyalty membership menu item.
@@ -43,7 +45,6 @@ namespace Capstone.Menus
         {
             // Check if the file exists and read existing data
             var existingData = File.Exists(path) ? File.ReadAllLines(path) : Array.Empty<string>();
-
             // Prepare the new data to write
             var Loyality = MemberShipParser.GetMemberShip();
             foreach (var i in Loyality)
@@ -64,65 +65,7 @@ namespace Capstone.Menus
                     }
                 }
             }
-            // Unique Member ID
-            Random random = new Random();
 
-            int MemberID = random.Next(0, 100);
-
-            // Prompting the user for input Firstname , Lastname, and Email Address
-            Console.WriteLine("Enter Firstname:");
-
-            string firstname = Console.ReadLine();
-
-            Console.WriteLine("Enter Suraname");
-
-            string lastname = Console.ReadLine();
-
-            Console.WriteLine("Enter Email Address");
-
-            string email = Console.ReadLine();
-
-            // Validating the input for Firstname, Lastname and Email Address. If not valid input restarts the method
-            bool Num = int.TryParse(firstname, out int i1);
-
-            bool Num2 = int.TryParse(lastname, out int i2);
-
-            bool First = char.IsUpper(firstname[0]);
-
-            bool Last = char.IsUpper(lastname[0]);
-
-            if (Num || Num2 || !First || !Last)
-            {
-                Console.WriteLine("Invalid Names");
-
-                PostProcess();
-            }
-            if (email[0] == '@' || email.Length == '@' || email[0] == '.' || email.Length == '.' || email.Contains("@@"))
-            {
-                Console.WriteLine("Invalid Email Address");
-
-                PostProcess();
-            }
-
-            // Retriving data from the Membership Parser
-            Loyality = MemberShipParser.GetMemberShip();
-
-            int Visted = 1;
-
-            // Checking if member already exists in the file if they do increments the amount of time they have visted by 1. 
-            using (StreamWriter sw = new StreamWriter(filepath))
-            {
-                foreach (var loyality in Loyality)
-                {
-                    if (firstname == loyality.Firstname && lastname == loyality.Lastname)
-                    {
-                        Console.WriteLine("Member Already Exists");
-                        Visted++;
-                    }
-                }
-                // Writing Updated data towards the file
-                sw.WriteLine($"[MemberID:{MemberID}%Firstname:{firstname}%Lastname:{lastname}%Email:{email}%Member:Loyality%Visted:{Visted}]");
-            }
         }
     }
 }

@@ -37,6 +37,10 @@ namespace Capstone.Cinema_features
             // Read all lines from the file and iterate through each line
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Trim the line and remove the brackets, then split by '%'
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -66,12 +70,24 @@ namespace Capstone.Cinema_features
                                 break;
                         }
                     }
+                    else
+                    {
+                        Exception();
+                    }
                 }
                 // Add the parsed Screen object to the list
                 ScreenManager.Add(Screen);
             }
             // Return the list of parsed screens
             return ScreenManager;
+        }
+        /// <summary>
+        /// This method is called when there is an exception in the parsing process.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Screen:{SCREEN} NumPremiumSeat:{NUMBEROFPREMIUMSEATS} NumStandardSeat:{NUMBEROFSTANDARDSEATS}]");
+            Environment.Exit(0);
         }
     }
 }

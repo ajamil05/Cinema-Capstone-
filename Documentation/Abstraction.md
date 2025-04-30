@@ -1,6 +1,6 @@
 # Abstraction (10%)
 
-# Code Snippet For Abstraction
+## Code Snippet For Abstraction
 ~~~cs
 internal abstract class MenuItem
 {
@@ -114,8 +114,9 @@ abstract class ConsoleMenu : MenuItem
     }
 }
 ```
+## Explain How Abstarction Is Completed
 In This Code Snippet The Abstract Console Menu Class Is Inheriting From The Abstract Class MenuItem. Inside The Abstract MenuItem Class There Are Two Abstract Methods MenuTitleText Method And The Select Method. As Presented Both Methods From The Abstract MenuItem Class Are Being Updated/ Overrided In The Abstract Console Menu Class. Abstraction Is Shown By Implementing Essential Features And Removing Uneccssary Data To Create a Fully Functional User Interaction Menu Syestem Inside The Abstract Console Menu Class.
 
-# Abstraction Class Digram
+## Abstraction Class Digram
 ![Abstraction Class Digram (1)](https://github.com/user-attachments/assets/9059fc7b-076b-4210-bf82-c59fb5a84685)
 

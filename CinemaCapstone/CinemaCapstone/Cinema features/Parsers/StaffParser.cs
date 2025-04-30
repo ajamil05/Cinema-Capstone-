@@ -38,6 +38,10 @@ namespace Capstone.Cinema_features
             // Read all lines from the file
             foreach (string line in File.ReadAllLines(path))
             {
+                if (line.Length < line.Trim('[', ']').Length)
+                {
+                    Exception();
+                }
                 // Split the line into parts using '%' as a delimiter and trim the brackets
                 string[] parts = line.Trim('[', ']').Split('%');
 
@@ -70,12 +74,24 @@ namespace Capstone.Cinema_features
                                 break;
                         }
                     }
+                    else
+                    {
+                        Exception();
+                    }
                 }
                 // Add the populated Staff object to the list
                 StaffManagerList.Add(Staff);
             }
             // Return the list of Staff objects
             return StaffManagerList;
+        }
+        /// <summary>
+        /// This method is called when the file format is invalid.
+        /// </summary>
+        private static void Exception()
+        {
+            Console.WriteLine("Invalid Formatt:[Staff:{STAFFID} Level:{STAFFLEVEL} FirstName:{FIRSTNAME} LastName:{LASTNAME}]");
+            Environment.Exit(0);
         }
     }
 }
